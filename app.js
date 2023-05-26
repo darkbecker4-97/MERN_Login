@@ -14,7 +14,13 @@ app.get("/",cors(),(req,res)=>{
 
 
 app.post("/",async(req,res)=>{
-    const{email,password}=req.body
+    const{msg,email,password}=req.body
+
+    const data={
+        msg:msg
+    }
+
+    await collection.insertMany([data])
 
     try{
         const check=await collection.findOne({email:email})
@@ -64,4 +70,4 @@ app.post("/signup",async(req,res)=>{
 app.listen(8000,()=>{
     console.log("port connected");
 })
-
+ 

@@ -1,16 +1,43 @@
-import React from "react"
-import {useLocation, useNavigate} from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
-function Home (){
-    const location=useLocation()
+export default function Home() {
 
-    return (
-        <div className="homepage">
+  const [msg, setMsg] = useState("");
 
-            <h1>Hello {location.state.id} and welcome to the home</h1>
+  let submit=async(e)=>{
+    e.preventDefault()
 
-        </div>
-    )
-}
+    try {
 
-export default Home
+      alert("submitted")
+      
+      await axios.post("http://localhost:8000/",{
+        msg
+      })
+
+    } catch (e) {
+      console.log(e);
+    }
+  }    
+
+  return (
+    <div className="cont">
+
+      <form action="POST">
+          <textarea
+            name="text"
+            onChange={(e) => {
+                setMsg(e.target.value);
+            }}
+            placeholder="Introduza o texto"
+            cols="30"
+            rows="10">
+          </textarea>
+          <input type="submit" onClick={submit} value="Submit" />
+      </form>
+
+    </div>
+  );
+};

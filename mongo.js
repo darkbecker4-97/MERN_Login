@@ -9,6 +9,10 @@ mongoose.connect("mongodb://0.0.0.0:27017/react-login-tut")
 
 
 const newSchema=new mongoose.Schema({
+    msg:{
+        type:String,
+        required:true
+    },
     email:{
         type:String,
         required:true
@@ -18,6 +22,8 @@ const newSchema=new mongoose.Schema({
         required:true
     }
 })
+
+
 
 const collection = mongoose.model("collection",newSchema)
 
